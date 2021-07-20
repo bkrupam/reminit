@@ -4,14 +4,15 @@ var sec = c.getMinutes();
 var currentime = hrs + ":" +sec;
 var currenTimeInSplit = currentime.split("");
 
-//notif
+
+//notification
 function notifyMe() {
   if (Notification.permission === "granted") {
-   var notification = new Notification(taskName);
+   var notification = new Notification("Time to do task");
   } else if (Notification.permission !== "denied") {
    Notification.requestPermission().then(function (permission) {
      if (permission === "granted") {
-       var notification = new Notification(taskName);
+       var notification = new Notification("Time to do task");
      }
    });
  }
@@ -21,17 +22,12 @@ function notifyMe() {
 
 
 
-
-
 //main function
  async function  inter(li , x, starttime , endtime) {
 
   var starttime = document.getElementById("starttime").value;
   var intervalByUser = document.getElementById("interval").value;
   var endtime = document.getElementById("endtime").value;
-  var taskName = document.getElementById("taskName").value;
-  
-
   starttimeWithSplit = starttime.split(":");
   endtimeWithSplit = endtime.split(":");
   var startDate = new Date(0, 0, 0, starttimeWithSplit[0], starttimeWithSplit[1], 0);
@@ -67,16 +63,16 @@ function notifyMe() {
       if (parseInt(t1)%60==0) {
         for (let i = 0; i< parseInt(t1)+1; i=i+intervalYes) {
           if (i>=0){
-            console.log(taskName);
+            console.log('TIME TO DO UR TASK');
             notifyMe();
             await new Promise(r => setTimeout(r, (intervalYes*60000)));
 
             
-            b= parseInt(li[3]+li[4]+ intervalYes);
+            b= parseInt(li[3]+li[4]+ intervalByUser);
             b= ''+ b;
             b=b.split("");
             li[3]= b[0];
-            li[4]= b[1];
+            li[4]=b[1];
             if (parseInt(li[3])>=6){
               if (li[1]!='9'){
                 li[1] = parseInt(li[1]+1);
@@ -104,7 +100,7 @@ function notifyMe() {
 
               } else{
                 li[1]='0';
-                li[0]= parseInt(li[0]+1);
+                li[0]= (parseInt(li[0])+1);
                 li[0] = ''+li[0];
                 a= li[3]+li[4];
                 a= (parseInt(a)-60)
@@ -153,7 +149,7 @@ function notifyMe() {
         for (let i = 0;i< (parseInt(t1)-intervalByUser)+1; i=i+intervalYes) {
           if(i>=0){
             //notification to be added
-            console.log(taskName);
+            console.log('TIME TO DO UR TASK');
             notifyMe();
             await new Promise(r => setTimeout(r, (intervalYes*60000)));
 
@@ -175,15 +171,15 @@ function notifyMe() {
                   li[3]=='0';
                   li[4]=a[0];
                 } else if(a.length==2){
-                  li[3]=a[0];
-                  li[4]=a[1];
+                  li[3]=a[0]
+                  li[4]=a[1]
                 }
-                console.log(li);
+                print(li)
 
 
               } else{
                 li[1]='0';
-                li[0]= (parseInt(li[0])+1);
+                li[0]= (parseInt(li[0])+1)
               }
 
             } else if(parseInt(li[3])<6){
@@ -194,7 +190,7 @@ function notifyMe() {
           }
           
         } 
-        console.log("TASK ENDED FOR THE DAY");
+        console.log("TASK ENDED FOR THE DAY")
 
       }
       
